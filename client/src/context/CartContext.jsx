@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import axiosInstance from "../api/axiosInstance";
 
 const CartContext = createContext(undefined);
 
@@ -6,6 +7,11 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   const addToCart = async (course) => {
+    // console.log(course);
+    const resp = await axiosInstance.post("/cart",{courseId:course?._id})
+    console.log(resp);
+
+
     setCart((prevCart) => {
       const existingCourse = prevCart.find((item) => item.name === course.name);
 
