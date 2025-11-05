@@ -1,8 +1,9 @@
 import { Trash2 } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
-export default function CartItem({ item: { name, image, quantity, price } }) {
+export default function CartItem({item}) {
   const { removeFromCart } = useCart();
+  const { name, image, quantity, price } = item;
   return (
     <div className="flex items-center p-6 space-x-6">
       <img

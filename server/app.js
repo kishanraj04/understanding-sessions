@@ -5,6 +5,7 @@ import courseRoutes from "./routes/courses.js";
 import cartRoutes from "./routes/cart.js";
 import authRoutes from "./routes/auth.js";
 import { seedDatabase } from "./seed.js";
+import cookieParser from "cookie-parser";
 
 await connectDB();
 await seedDatabase();
@@ -22,6 +23,7 @@ app.use(
 app.use(express.json());
 
 // Routes
+app.use(cookieParser("kishu"))
 app.use("/courses", courseRoutes);
 app.use("/cart", cartRoutes);
 app.use("/auth", authRoutes);
