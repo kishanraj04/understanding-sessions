@@ -1,12 +1,20 @@
 import { useState } from "react";
+import axiosInstance from "../api/axiosInstance";
+import { useNavigate } from 'react-router-dom';
+
 export default function Register() {
   const [name, setName] = useState("Shubham Semwal");
   const [email, setEmail] = useState("shubham@gmail.com");
   const [password, setPassword] = useState("shubham@123");
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log({ name, email, password });
+    try {
+      const resp = await axiosInstance.post("/auth/register",{name,email,password})
+      if(resp) navigate("/login")
+    } catch (error) {
+      console.log(error?.message);
+    }
   };
 
   return (

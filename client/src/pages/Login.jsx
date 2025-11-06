@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import axiosInstance from "../api/axiosInstance";
 export default function Login() {
   const [email, setEmail] = useState("shubham@gmail.com");
   const [password, setPassword] = useState("shubham@123");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log({ email, password });
+    try {
+      const resp = await axiosInstance.post("/auth/login",{email,password})
+      console.log(resp);
+    } catch (error) {
+      
+    }
   };
 
   return (

@@ -27,8 +27,13 @@ export function CartProvider({ children }) {
     });
   };
 
-  const removeFromCart = (course) => {
-    setCart((prevCart) => prevCart.filter((item) => item.name !== course.name));
+  const removeFromCart = async(course) => {
+    try {
+      const resp = await axiosInstance.delete(`/cart/${course?._id}`,{courseId:course?._id});
+      console.log(resp);
+    } catch (error) {
+      
+    }
   };
 
   const cartCount = cart.reduce(

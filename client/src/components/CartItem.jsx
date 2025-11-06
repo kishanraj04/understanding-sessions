@@ -1,9 +1,19 @@
 import { Trash2 } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useEffect } from "react";
 
 export default function CartItem({item}) {
   const { removeFromCart } = useCart();
   const { name, image, quantity, price } = item;
+
+  // useEffect(()=>{
+  //   try {
+      
+  //   } catch (error) {
+      
+  //   }
+  // },[])
+
   return (
     <div className="flex items-center p-6 space-x-6">
       <img

@@ -1,5 +1,4 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
@@ -25,15 +24,9 @@ router.post("/register", async (req, res) => {
     await user.save();
 
     // Generate JWT token
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_SECRET || "your-secret-key",
-      { expiresIn: "24h" }
-    );
-
+    
     res.status(201).json({
       message: "User registered successfully",
-      token,
       user: {
         id: user._id,
         email: user.email,
@@ -58,20 +51,15 @@ router.post("/login", async (req, res) => {
 
     // Check password
     const isPasswordValid = await user.comparePassword(password);
+
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_SECRET || "your-secret-key",
-      { expiresIn: "24h" }
-    );
+    
 
     res.json({
       message: "Login successful",
-      token,
       user: {
         id: user._id,
         email: user.email,
