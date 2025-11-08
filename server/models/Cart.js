@@ -1,24 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const cartSchema = new mongoose.Schema(
   {
-    guestId: {
-      type: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"User",
       required: true,
     },
-    courses: [
+    cart:[
       {
-        courseId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Course",
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
-      },
-    ],
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Course"
+      }
+    ]
   },
   { timestamps: true }
 );

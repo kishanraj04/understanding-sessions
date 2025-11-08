@@ -10,7 +10,7 @@ export default function Login() {
       const resp = await axiosInstance.post("/auth/login",{email,password})
       console.log(resp);
     } catch (error) {
-      
+      console.log(error?.message);
     }
   };
 
